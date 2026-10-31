@@ -172,52 +172,57 @@ Inspect the frame critically and return valid JSON with:
             }
 
     def compute_calibration(self, tech: Dict[str, Any], vision: Dict[str, Any], platform: str = "Instagram Reels") -> Dict[str, Any]:
-        """Computes deterministic, unvarnished calibration constraints based on physical video signals."""
+        """Computes balanced, realistic calibration constraints grounded in physical video and creative signals."""
         is_test = vision.get("is_synthetic_or_test_card", False)
-        v_hook = int(vision.get("visual_hook_score_1_to_10", 5))
+        v_hook = int(vision.get("visual_hook_score_1_to_10", 6))
+        prod_qual = int(vision.get("production_quality_score_1_to_10", v_hook))
         has_audio = tech.get("has_audio", True)
         is_vert = tech.get("is_vertical_9_16", True)
 
         if is_test:
-            # Completely broken / placeholder / test card: 12% - 22% retention max
-            calibrated_hook_score = max(8, min(24, v_hook * 8))
+            # Completely broken / placeholder / test card: 10% - 22% retention max
+            calibrated_hook_score = max(8, min(22, v_hook * 8))
             max_retention_cap = 0.22
             typical_skip_rate = 0.88
             quality_tier = "Critical Failure / Unreleasable"
-        elif not is_vert and "Reels" in platform:
-            # Horizontal letterboxed video on short-form feed: severe penalty
-            calibrated_hook_score = max(20, min(42, v_hook * 6 + 10))
-            max_retention_cap = 0.36
-            typical_skip_rate = 0.72
-            quality_tier = "High Drop-Off Risk (Letterboxed)"
-        elif v_hook <= 3:
-            # Very weak visual hook (static, boring, dark, no contrast)
-            calibrated_hook_score = max(18, min(38, v_hook * 10 + 5))
-            max_retention_cap = 0.34
-            typical_skip_rate = 0.75
-            quality_tier = "High Drop-Off Risk"
-        elif v_hook <= 5:
-            # Mediocre / standard video
-            calibrated_hook_score = max(40, min(58, v_hook * 10 + 4))
-            max_retention_cap = 0.48
-            typical_skip_rate = 0.58
-            quality_tier = "Average / Needs Visual Polish"
-        elif v_hook <= 7:
-            # Good quality video
-            calibrated_hook_score = max(60, min(74, v_hook * 9 + 8))
-            max_retention_cap = 0.64
-            typical_skip_rate = 0.38
-            quality_tier = "Above Average / Strong Contender"
+        elif v_hook <= 2 and prod_qual <= 2:
+            # Completely black or corrupt video
+            calibrated_hook_score = 15
+            max_retention_cap = 0.20
+            typical_skip_rate = 0.90
+            quality_tier = "Critical Failure / Unreleasable"
+        elif v_hook <= 4 and prod_qual <= 4:
+            # Very weak creative (shaky camera, poor lighting, boring static slide)
+            calibrated_hook_score = max(28, min(48, v_hook * 10 + 4))
+            max_retention_cap = 0.42
+            typical_skip_rate = 0.65
+            quality_tier = "High Drop-Off Risk / Needs Polish"
+        elif v_hook <= 6:
+            # Average / standard content or commercial with moderate hook
+            calibrated_hook_score = max(50, min(68, v_hook * 9 + 8))
+            max_retention_cap = 0.60
+            typical_skip_rate = 0.45
+            quality_tier = "Average / Competitive Contender"
+        elif v_hook <= 8:
+            # High-production commercial (BMW, Apple, Nike) or strong creator video
+            calibrated_hook_score = max(70, min(84, v_hook * 8 + 16))
+            max_retention_cap = 0.75
+            typical_skip_rate = 0.28
+            quality_tier = "High Production / Strong Viral Contender"
         else:
-            # Top tier viral creative
-            calibrated_hook_score = max(76, min(92, v_hook * 9 + 6))
-            max_retention_cap = 0.78
-            typical_skip_rate = 0.24
-            quality_tier = "Top 5% Viral Contender"
+            # Top 3% viral pattern interrupt
+            calibrated_hook_score = max(85, min(95, v_hook * 7 + 25))
+            max_retention_cap = 0.85
+            typical_skip_rate = 0.18
+            quality_tier = "Elite Viral S-Tier"
+
+        # Aspect ratio: Do NOT crush a video for being 16:9; minor 4-point adjustment on short-form feeds
+        if not is_vert and ("Reels" in platform or "TikTok" in platform or "Shorts" in platform):
+            calibrated_hook_score = max(25, calibrated_hook_score - 4)
 
         if not has_audio:
-            calibrated_hook_score = max(12, calibrated_hook_score - 18)
-            max_retention_cap = min(max_retention_cap, 0.28)
+            calibrated_hook_score = max(12, calibrated_hook_score - 15)
+            max_retention_cap = min(max_retention_cap, 0.35)
 
         return {
             "calibrated_hook_score": calibrated_hook_score,

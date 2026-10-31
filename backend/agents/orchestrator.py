@@ -227,27 +227,27 @@ You orchestrate an unvarnished council of 5 specialized agents evaluating a shor
 4. ViralAlgorithm AI (distribution gating, loop multiplier, shareability)
 5. CreativeDirector AI (executive verdict, prioritized action plan, A/B variants)
 
-STRICT REAL-WORLD CALIBRATION BENCHMARKS:
-- Grade "F / Unreleasable" (Score 5-25, Retention 10-25%, Skip Rate 85-95%): Test pattern, SMPTE color bars, blank screen, unrendered placeholder, static graphic, zero motion, horizontal black bars on vertical feed.
-- Grade "D / High Drop-off" (Score 26-44, Retention 26-42%, Skip Rate 65-80%): Weak opening, slow talking head, no pattern interrupt, missing captions.
-- Grade "C / Average" (Score 45-62, Retention 43-58%, Skip Rate 45-60%): Standard delivery, conventional pacing without scroll-stopping shock.
-- Grade "B / Strong" (Score 63-78, Retention 59-72%, Skip Rate 30-40%): High visual energy, clear text hook, immediate visual curiosity within 1.5s.
-- Grade "A / Top Tier Viral" (Score 79-92, Retention 73-85%, Skip Rate 15-25%): Irresistible visual pattern interrupt, high-stakes curiosity gap, flawless kinetic framing.
+REAL-WORLD CALIBRATION BENCHMARKS & EVALUATION CRITERIA:
+- Grade "F / Unreleasable" (Score 5-25, Retention 10-25%, Skip Rate 85-95%): STRICTLY for broken files, SMPTE color bars, test patterns, black/blank screens, or corrupt/silent placeholders.
+- Grade "D / High Drop-off" (Score 26-48, Retention 26-42%, Skip Rate 55-75%): Low-effort video, shaky phone camera, confusing audio, unedited dull monologues with zero hook.
+- Grade "C / Average / Competitive" (Score 49-65, Retention 43-58%, Skip Rate 40-55%): Standard social content, basic creator talking head, average product review with conventional pacing.
+- Grade "B / Strong / High Production" (Score 66-82, Retention 59-74%, Skip Rate 25-38%): High-production brand commercials (e.g. BMW, Apple, Nike, Samsung), cinematic automotive/tech showcases, crisp professional lighting and color grading, high brand interest. Audiences and enthusiasts actively watch these!
+- Grade "A / Elite Viral Contender" (Score 83-95, Retention 75-88%, Skip Rate 12-24%): Top viral masterclasses with irresistible pattern interrupts and magnetic curiosity gaps.
 
-DO NOT inflate scores. Giving 80% to an average or flawed video completely destroys creator trust.
+IMPORTANT: Evaluate real-world commercials and polished productions on their actual creative and cinematography merits. Do not unfairly penalize cinematic commercials as if they were broken test patterns.
 
 Respond ONLY in valid JSON matching this exact structure:
 {{
   "vision_inspection": {{
-    "is_synthetic_or_test_card": <bool>,
-    "visual_hook_score_1_to_10": <int 1-10>,
-    "primary_subject": <string>,
+    "is_synthetic_or_test_card": <bool, TRUE only for SMPTE bars, testsrc, or black screen>,
+    "visual_hook_score_1_to_10": <int 1-10: 1-2 test card/black; 3-4 blurry/dull; 5-6 standard; 7-8 cinematic/commercial; 9-10 viral shock>,
+    "primary_subject": <string concise summary of visual creative>,
     "defects": [<string>]
   }},
   "hook_master": {{
-    "hook_score": <int 1-100>,
-    "retention_0_to_3s_pct": <float>,
-    "hook_grade": <string>,
+    "hook_score": <int 1-100, calibrated to visual quality>,
+    "retention_0_to_3s_pct": <float between 10.0 and 85.0 representing percentage, e.g. 68.5>,
+    "hook_grade": <string "A / Top Tier" | "B / Strong" | "C / Average" | "D / High Risk" | "F / Unreleasable">,
     "verdict": <string>,
     "analysis": <string>,
     "curiosity_gap": {{"level": <string>, "explanation": <string>}},
@@ -403,9 +403,17 @@ Respond ONLY in valid JSON matching this exact structure:
             completion_prob = ret_curve[-1].get("retention", 0.15)
             hook_ret = hook.get("retention_0_to_3s_pct")
             if hook_ret is not None:
-                skip_prob = max(0.08, min(0.96, round(1.0 - (hook_ret / 100.0), 3)))
+                # Handle both percentage (e.g. 68.5) and decimal fraction (e.g. 0.685)
+                h_val = float(hook_ret)
+                hook_frac = (h_val / 100.0) if h_val > 1.0 else h_val
+                skip_prob = max(0.08, min(0.92, round(1.0 - hook_frac, 3)))
+            elif len(ret_curve) > 1:
+                ret_0 = ret_curve[0].get("retention", 1.0)
+                ret_1 = ret_curve[1].get("retention", 0.6)
+                drop = max(0.08, ret_0 - ret_1)
+                skip_prob = max(0.08, min(0.92, round(drop, 3)))
             else:
-                skip_prob = max(0.08, min(0.96, round(1.0 - (ret_curve[1].get("retention", avg_retention)), 3)))
+                skip_prob = max(0.08, min(0.92, round(1.0 - avg_retention, 3)))
         else:
             avg_retention = 0.35
             completion_prob = 0.12

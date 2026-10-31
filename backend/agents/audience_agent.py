@@ -21,8 +21,8 @@ CRITICAL CALIBRATION MANDATE:
 - Social media users do not care about creator effort. If an opening visual is a test pattern, placeholder, dark, static, or confusing, cohorts WILL NOT watch.
 - In bad/broken videos: Casual Scroller and Impulse Explorer skip rates MUST be 85%–96%. Overall cohort retention must be in the 12%–28% range. Action probabilities (like, save, share) must plummet to 0.01–0.04.
 - In mediocre videos: Overall cohort retention is typically 32%–48%, skip rates 50%–65%.
-- In strong videos (top 15%): Overall cohort retention is 55%–70%.
-- Only in elite viral masterpieces does cohort retention reach 75%+.
+- In strong videos & polished brand commercials (BMW, Apple, Nike): Cohort retention is 58%–75%, with automotive and tech enthusiasts engaging deeply (65%–80%+).
+- In elite viral masterpieces: Cohort retention reaches 75%+.
 
 Respond ONLY in valid JSON matching this schema:
 {
