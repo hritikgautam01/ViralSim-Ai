@@ -71,8 +71,10 @@ a{color:inherit;text-decoration:none}
   color:#171A17;
 }
 .brandmark svg{width:22px}
-.navlinks{display:flex;gap:26px;color:#D0D3CA;font-size:13px}
-.navlinks a:hover{color:white}
+.navlinks{display:flex;gap:16px;color:#D0D3CA;font-size:13px;align-items:center}
+.navlinks a{padding:6px 12px;border-radius:8px;transition:all .18s ease;cursor:pointer;display:inline-block}
+.navlinks a:hover{color:white;background:#F5F5F012}
+.navlinks a.active{color:white;background:#6E856230;border:1px solid #6E856260;font-weight:600}
 .topactions{display:flex;gap:10px;align-items:center}
 
 /* Buttons */
@@ -101,7 +103,7 @@ a{color:inherit;text-decoration:none}
 .mobile-toggle{display:none}
 
 /* Landing */
-.landing{overflow:hidden}
+.landing{overflow-x:clip}
 .hero{
   padding:76px clamp(20px,7vw,105px) 68px;
   display:grid;
@@ -243,7 +245,7 @@ a{color:inherit;text-decoration:none}
 .signal small{font-size:9px;color:var(--green)}
 
 /* Sections */
-.section{padding:78px clamp(20px,7vw,105px);max-width:1480px;margin:auto}
+.section{padding:78px clamp(20px,7vw,105px);max-width:1480px;margin:auto;scroll-margin-top:84px}
 .section.light{max-width:none;background:var(--white);color:#171A17}
 .section.light .muted{color:#545C50}
 .section-head{display:flex;justify-content:space-between;gap:35px;align-items:end;margin-bottom:32px}
@@ -706,6 +708,46 @@ a{color:inherit;text-decoration:none}
   .persona-grid{grid-template-columns:1fr}
   .form-grid{grid-template-columns:1fr}
 }
+/* Agentic AI Components */
+.agents-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:24px}
+.agent-card{border:1px solid #41473D;background:#20241F;border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:12px;transition:all .22s ease}
+.agent-card:hover{border-color:#F5F5F033;transform:translateY(-2px);box-shadow:0 12px 36px #00000040}
+.agent-card-head{display:flex;align-items:center;gap:14px}
+.agent-avatar{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:20px;flex-shrink:0}
+.agent-card h3{margin:0 0 2px;font-size:17px;font-weight:700;letter-spacing:-.03em}
+.agent-role{font-size:11px;color:#A7ADA1;font-weight:500}
+.agent-card p{margin:0;font-size:13px;line-height:1.65;color:#C2C7BD}
+.agent-skills{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:8px}
+.agent-skills span{background:#F5F5F00a;border:1px solid #F5F5F014;color:#D0D3CA;padding:4px 9px;border-radius:6px;font-size:10.5px;font-weight:600}
+
+/* Studio Agent Deliberation Hub */
+.agent-hub-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:18px 0}
+.agent-hub-item{border:1px solid #41473D;background:#171A17;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px;transition:all .18s ease}
+.agent-hub-item:hover{border-color:#F5F5F035}
+.agent-hub-top{display:flex;align-items:center;gap:10px}
+.agent-hub-avatar{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;font-size:15px}
+.agent-hub-score{font-size:18px;font-weight:750;letter-spacing:-.04em}
+.script-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:12px}
+.script-card{border:1px solid #41473D;background:#171A17;border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.script-card-head{display:flex;justify-content:space-between;align-items:center}
+.script-style-tag{font-size:11px;font-weight:700;color:var(--cyan);background:#B3C5A518;padding:3px 8px;border-radius:6px}
+.script-lift-tag{font-size:11px;font-weight:700;color:var(--green)}
+.script-text{font-size:13px;line-height:1.55;color:#F5F5F0;font-weight:500;background:#20241F;border-left:3px solid var(--cyan);padding:10px 12px;border-radius:0 8px 8px 0}
+.script-visual{font-size:11px;color:#A7ADA1;line-height:1.5}
+.cliff-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.cliff-card{border:1px solid #41473D;background:#171A17;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.cliff-badge{font-size:10px;font-weight:750;text-transform:uppercase;letter-spacing:.08em;padding:3px 7px;border-radius:5px;width:fit-content}
+.cliff-badge.critical{background:#D5AAA025;color:#D5AAA0;border:1px solid #D5AAA044}
+.cliff-badge.moderate{background:#D6C39D25;color:#D6C39D;border:1px solid #D6C39D44}
+.funnel-container{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.funnel-step{border:1px solid #41473D;background:#171A17;border-radius:12px;padding:14px}
+.variant-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.variant-card{border:1px solid #41473D;background:#171A17;border-radius:14px;padding:16px}
+.monologue-card{border:1px solid #41473D;background:#171A17;border-radius:14px;padding:14px;margin-bottom:10px}
+
+@media(max-width:950px){
+  .agents-grid,.cliff-grid,.variant-grid,.funnel-container{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -726,6 +768,7 @@ a{color:inherit;text-decoration:none}
     <a href="#product">Product</a>
     <a href="#how">How it works</a>
     <a href="#simulation">Simulation</a>
+    <a href="#agents">AI Agents</a>
     <a href="#use-cases">Use cases</a>
     <a href="#docs">Documentation</a>
   </nav>
@@ -916,6 +959,88 @@ a{color:inherit;text-decoration:none}
         </div>
         <p style="font-size:10px;color:#A7ADA1;margin-top:15px">Illustrative visual. Live run values appear in the workspace studio.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- AI Agents Section -->
+  <section class="section" id="agents">
+    <div class="section-head">
+      <div>
+        <div class="overline">Autonomous Deliberative Intelligence</div>
+        <h2>5 Specialized AI Agents.<br>Zero Guesswork.</h2>
+      </div>
+      <p>Rather than relying on one generalist model or synthetic heuristics, ViralSim AI deploys 5 specialized AI agents powered by Gemini, each focused exclusively on a critical dimension of short-form video performance.</p>
+    </div>
+    <div class="agents-grid">
+      <article class="agent-card">
+        <div class="agent-card-head">
+          <span class="agent-avatar" style="background:#D6C39D25;color:#D6C39D">⚡</span>
+          <div>
+            <h3>HookMaster AI</h3>
+            <span class="agent-role">Opening Hook & Attention Specialist</span>
+          </div>
+        </div>
+        <p>Scrutinizes the critical 0:00–0:03s window where 65%+ of viewer drops occur. Audits pattern interrupts, curiosity gaps, visual contrast, and writes 3 alternative high-retention hooks.</p>
+        <div class="agent-skills">
+          <span>0-3s Drop-off</span><span>Pattern Interrupts</span><span>Script Rewrites</span>
+        </div>
+      </article>
+
+      <article class="agent-card">
+        <div class="agent-card-head">
+          <span class="agent-avatar" style="background:#B3C5A525;color:#B3C5A5">🧠</span>
+          <div>
+            <h3>AudiencePsychologist AI</h3>
+            <span class="agent-role">Viewer Cognition & Persona Simulator</span>
+          </div>
+        </div>
+        <p>Simulates cognitive internal monologues and objections across 8 demographic viewer cohorts. Predicts exact probabilities for Continue, Skip, Like, Save, and Comment.</p>
+        <div class="agent-skills">
+          <span>Cognitive Monologues</span><span>Objection Mapping</span><span>Cohort Divergence</span>
+        </div>
+      </article>
+
+      <article class="agent-card">
+        <div class="agent-card-head">
+          <span class="agent-avatar" style="background:#6E856225;color:#6E8562">📉</span>
+          <div>
+            <h3>RetentionPacing AI</h3>
+            <span class="agent-role">Timeline & Cognitive Fatigue Auditor</span>
+          </div>
+        </div>
+        <p>Constructs a second-by-second dynamic retention curve. Detects cognitive fatigue accumulation, transition stalls, and flags exact drop-off cliff events with severity ratings.</p>
+        <div class="agent-skills">
+          <span>Dynamic Curves</span><span>Drop-off Cliffs</span><span>Editorial Cadence</span>
+        </div>
+      </article>
+
+      <article class="agent-card">
+        <div class="agent-card-head">
+          <span class="agent-avatar" style="background:#D8E0CF25;color:#D8E0CF">🚀</span>
+          <div>
+            <h3>ViralAlgorithm AI</h3>
+            <span class="agent-role">Platform Recommendation Engine Strategist</span>
+          </div>
+        </div>
+        <p>Reverse-engineers platform recommendation graphs for Reels, TikTok, and Shorts. Computes loop rewatch multipliers, DM share velocity, and multi-stage distribution funnels.</p>
+        <div class="agent-skills">
+          <span>Loop Multipliers</span><span>DM Shareability</span><span>FYP Distribution</span>
+        </div>
+      </article>
+
+      <article class="agent-card" style="grid-column: span 2">
+        <div class="agent-card-head">
+          <span class="agent-avatar" style="background:#A8B99B25;color:#A8B99B">🎬</span>
+          <div>
+            <h3>CreativeDirector AI</h3>
+            <span class="agent-role">Executive Synthesis & High-ROI Editorial Director</span>
+          </div>
+        </div>
+        <p>Synthesizes the findings of all upstream specialist agents into a decisive, prioritized editorial roadmap. Delivers timestamped cut directives, A/B test variant hypotheses, and publish readiness scoring.</p>
+        <div class="agent-skills">
+          <span>Prioritized Action Plan</span><span>A/B Variant Cuts</span><span>Publish Readiness</span>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -1563,10 +1688,34 @@ function setPage(page) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+function scrollToSection(targetId) {
+  $('workspace').classList.remove('active');
+  $('landing').style.display = 'block';
+  $('sidebar').classList.remove('open');
+  $('topNav').classList.remove('open');
+
+  document.querySelectorAll('#topNav a').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('href') === '#' + targetId);
+  });
+
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      let targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        let rect = targetEl.getBoundingClientRect();
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        let top = rect.top + scrollTop - 82;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      }
+    }, 30);
+  });
+}
+
 function goLanding() {
   $('workspace').classList.remove('active');
   $('landing').style.display = 'block';
   $('sidebar').classList.remove('open');
+  document.querySelectorAll('#topNav a').forEach(el => el.classList.remove('active'));
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -1586,16 +1735,7 @@ document.querySelectorAll('#topNav a').forEach(a => {
     e.preventDefault();
     let href = a.getAttribute('href');
     if (href && href.startsWith('#')) {
-      let targetId = href.substring(1);
-      $('workspace').classList.remove('active');
-      $('landing').style.display = 'block';
-      $('sidebar').classList.remove('open');
-      $('topNav').classList.remove('open');
-
-      let targetEl = document.getElementById(targetId);
-      if (targetEl) {
-        targetEl.scrollIntoView({ behavior: 'smooth' });
-      }
+      scrollToSection(href.substring(1));
     }
   });
 });
@@ -1851,8 +1991,18 @@ function renderRuns() {
 
 function renderSettings() {
   $('settingsProvider').textContent = state.health?.llm_configured
-    ? 'An API key exists, but LLM-based analysis is not configured in this build.'
+    ? `Configured: ${state.health.llm_model || 'gemini-3.5-flash-lite'} (5 Autonomous AI Agents Active: HookMaster, AudiencePsychologist, RetentionPacing, ViralAlgorithm, CreativeDirector)`
     : 'No LLM provider configured. Current simulation uses a seeded heuristic.';
+}
+
+function formatMarkdown(txt) {
+  if (!txt) return '';
+  let s = esc(txt);
+  s = s.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  s = s.replace(/\*(.*?)\*/g, '<em>$1</em>');
+  s = s.replace(/\n\n/g, '<br><br>');
+  s = s.replace(/\n/g, '<br>');
+  return s;
 }
 
 /* Creative Studio & Synchronized Video Player */
@@ -1887,6 +2037,204 @@ function renderAnalytics() {
       </div>
     `;
 
+    let agentHubHtml = '';
+    if (r.agents) {
+      let h = r.agents.hook_master || {};
+      let aud = r.agents.audience_psychologist || {};
+      let ret = r.agents.retention_pacing || {};
+      let alg = r.agents.viral_algorithm || {};
+      let dir = r.agents.creative_director || {};
+
+      agentHubHtml = `
+        <div class="panel" style="margin-top:18px;border-color:#F5F5F024;background:linear-gradient(155deg,#232922,#171A17)">
+          <div class="panel-head">
+            <div>
+              <div style="display:flex;align-items:center;gap:9px">
+                <span style="font-size:20px">🤖</span>
+                <h3 style="margin:0;font-size:18px">Multi-Agent Deliberation Hub</h3>
+              </div>
+              <p style="margin-top:4px">5 specialized AI agents autonomously analyzed this cut using Gemini LLM reasoning.</p>
+            </div>
+            <span class="live-pill" style="border-color:#B3C5A5;color:var(--cyan)">● 5 AGENTS ACTIVE</span>
+          </div>
+
+          <!-- Multimodal Vision Frame Audit -->
+          ${r.video_audit?.vision ? `
+            <div style="border:1px solid ${r.video_audit.calibration?.is_synthetic_or_test ? '#D5AAA055' : '#41473D'};background:#171A17;border-radius:12px;padding:12px 16px;margin:14px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+              <div style="display:flex;align-items:center;gap:12px">
+                <span style="font-size:22px">${r.video_audit.calibration?.is_synthetic_or_test ? '⚠️' : '👁️'}</span>
+                <div>
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <strong style="font-size:12px">Vision AI Frame Audit:</strong>
+                    <span class="tag" style="font-size:10px;${r.video_audit.calibration?.is_synthetic_or_test ? 'color:#D5AAA0;background:#D5AAA015' : 'color:var(--cyan)'}">${esc(r.video_audit.vision.primary_visual_subject || 'Video')}</span>
+                    <span style="font-size:11px;color:#A7ADA1">Hook Visual Rating: <b>${r.video_audit.vision.visual_hook_score_1_to_10 || 5}/10</b></span>
+                  </div>
+                  <p style="margin:3px 0 0;font-size:11px;color:#C2C7BD">${esc(r.video_audit.vision.visual_summary || '')}</p>
+                </div>
+              </div>
+              <div style="font-size:11px;color:#A7ADA1">
+                Format: <b>${esc(r.video_audit.technical?.aspect_ratio || '9:16')}</b> · Captions: <b>${r.video_audit.vision.has_readable_captions ? 'Detected' : 'Missing'}</b>
+              </div>
+            </div>
+          ` : ''}
+
+          <div class="agent-hub-strip">
+            <div class="agent-hub-item">
+              <div class="agent-hub-top">
+                <span class="agent-hub-avatar" style="background:#D6C39D25;color:#D6C39D">⚡</span>
+                <div>
+                  <strong style="font-size:12px;display:block">HookMaster AI</strong>
+                  <small style="color:#A7ADA1">0-3s Attention</small>
+                </div>
+              </div>
+              <div class="agent-hub-score" style="color:#D6C39D">${h.hook_score || '--'}<span style="font-size:11px;color:#A7ADA1">/100 (${esc(h.hook_grade || 'Grade')})</span></div>
+              <small style="font-size:11px;color:#C2C7BD">${esc(h.verdict || 'Analysis ready')}</small>
+            </div>
+
+            <div class="agent-hub-item">
+              <div class="agent-hub-top">
+                <span class="agent-hub-avatar" style="background:#B3C5A525;color:#B3C5A5">🧠</span>
+                <div>
+                  <strong style="font-size:12px;display:block">AudiencePsychologist AI</strong>
+                  <small style="color:#A7ADA1">Viewer Cognition</small>
+                </div>
+              </div>
+              <div class="agent-hub-score" style="color:#B3C5A5">${(r.cohorts || []).length}<span style="font-size:11px;color:#A7ADA1"> Cohorts</span></div>
+              <small style="font-size:11px;color:#C2C7BD">Risk: ${esc(aud.retention_vulnerability_cohort || 'Casual Scroller')}</small>
+            </div>
+
+            <div class="agent-hub-item">
+              <div class="agent-hub-top">
+                <span class="agent-hub-avatar" style="background:#6E856225;color:#6E8562">📉</span>
+                <div>
+                  <strong style="font-size:12px;display:block">RetentionPacing AI</strong>
+                  <small style="color:#A7ADA1">Timeline Cadence</small>
+                </div>
+              </div>
+              <div class="agent-hub-score" style="color:#6E8562">${ret.pacing_score || '--'}<span style="font-size:11px;color:#A7ADA1">/100</span></div>
+              <small style="font-size:11px;color:#C2C7BD">Fatigue: ${esc(ret.cognitive_fatigue_level || 'Moderate')}</small>
+            </div>
+
+            <div class="agent-hub-item">
+              <div class="agent-hub-top">
+                <span class="agent-hub-avatar" style="background:#D8E0CF25;color:#D8E0CF">🚀</span>
+                <div>
+                  <strong style="font-size:12px;display:block">ViralAlgorithm AI</strong>
+                  <small style="color:#A7ADA1">Recommendation Graph</small>
+                </div>
+              </div>
+              <div class="agent-hub-score" style="color:#D8E0CF">${alg.algorithm_score || '--'}<span style="font-size:11px;color:#A7ADA1">/100</span></div>
+              <small style="font-size:11px;color:#C2C7BD">Loop: ${alg.loop_rewatch_potential?.multiplier || '1.2'}x potential</small>
+            </div>
+
+            <div class="agent-hub-item">
+              <div class="agent-hub-top">
+                <span class="agent-hub-avatar" style="background:#A8B99B25;color:#A8B99B">🎬</span>
+                <div>
+                  <strong style="font-size:12px;display:block">CreativeDirector AI</strong>
+                  <small style="color:#A7ADA1">Executive Synthesis</small>
+                </div>
+              </div>
+              <div class="agent-hub-score" style="color:var(--violet)">${esc(dir.creative_tier || 'Ready')}</div>
+              <small style="font-size:11px;color:#C2C7BD">${esc(dir.executive_verdict?.slice(0, 65) || 'Synthesis ready')}…</small>
+            </div>
+          </div>
+
+          ${h.hook_rewrites && h.hook_rewrites.length ? `
+            <div style="margin-top:20px;border-top:1px solid #41473D;padding-top:16px">
+              <h4 style="margin:0 0 4px;font-size:14px;display:flex;align-items:center;gap:6px">
+                <span>⚡</span> HookMaster AI: 3 Alternative Opening Hooks
+              </h4>
+              <p style="margin:0 0 10px;font-size:11px;color:#A7ADA1">Deploy these rewritten opening concepts to eliminate drop-off in seconds 00:00–00:03.</p>
+              <div class="script-grid">
+                ${h.hook_rewrites.map(s => `
+                  <div class="script-card">
+                    <div class="script-card-head">
+                      <span class="script-style-tag">${esc(s.style)}</span>
+                      <span class="script-lift-tag">${esc(s.expected_lift)}</span>
+                    </div>
+                    <div class="script-text">“${esc(s.spoken_script)}”</div>
+                    <div class="script-visual"><b>Visual Framing:</b> ${esc(s.visual_cue)}</div>
+                    <button class="btn small script-copy-btn" onclick="navigator.clipboard.writeText('${esc(s.spoken_script).replace(/'/g, "\\'")}'); toast('Hook script copied to clipboard!');">📋 Copy Script</button>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          ` : ''}
+
+          <div class="grid-two" style="margin-top:20px;border-top:1px solid #41473D;padding-top:16px">
+            <div>
+              <h4 style="margin:0 0 4px;font-size:14px;display:flex;align-items:center;gap:6px">
+                <span>📉</span> RetentionPacing AI: Drop-off Cliffs
+              </h4>
+              <p style="margin:0 0 10px;font-size:11px;color:#A7ADA1">Identified pacing hazards where viewers are most likely to abandon.</p>
+              <div style="display:grid;gap:10px">
+                ${(ret.drop_off_cliffs || []).map(c => `
+                  <div class="cliff-card">
+                    <div style="display:flex;justify-content:space-between;align-items:center">
+                      <span class="cliff-badge ${(c.severity || '').toLowerCase()}">${esc(c.severity)} cliff</span>
+                      <button class="btn small" data-seek-str="${c.timestamp}">▷ ${esc(c.timestamp)}</button>
+                    </div>
+                    <div style="font-size:12px;color:#F5F5F0"><b>Cause:</b> ${esc(c.cause)}</div>
+                    <div style="font-size:11px;color:var(--cyan)"><b>Editor Fix:</b> ${esc(c.fix)}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div>
+              <h4 style="margin:0 0 4px;font-size:14px;display:flex;align-items:center;gap:6px">
+                <span>🚀</span> ViralAlgorithm AI: Distribution Funnel
+              </h4>
+              <p style="margin:0 0 10px;font-size:11px;color:#A7ADA1">Simulated pass-rates through the recommendation graph.</p>
+              <div style="display:grid;gap:10px">
+                <div class="funnel-step">
+                  <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px">
+                    <span><b>Stage 1: Seed Pool</b> (100–500 viewers)</span>
+                    <strong style="color:var(--green)">${alg.distribution_funnel?.initial_seed_pool?.pass_rate_pct || 82}% Pass</strong>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" style="width:${alg.distribution_funnel?.initial_seed_pool?.pass_rate_pct || 82}%"></div></div>
+                </div>
+                <div class="funnel-step">
+                  <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px">
+                    <span><b>Stage 2: Adjacent Expansion</b> (${alg.distribution_funnel?.adjacent_audience_expansion?.expected_reach || '10k–35k'})</span>
+                    <strong style="color:var(--cyan)">${alg.distribution_funnel?.adjacent_audience_expansion?.probability_pct || 62}% Prob</strong>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" style="width:${alg.distribution_funnel?.adjacent_audience_expansion?.probability_pct || 62}%"></div></div>
+                </div>
+                <div class="funnel-step">
+                  <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px">
+                    <span><b>Stage 3: Broad FYP/Explore</b></span>
+                    <strong style="color:var(--orange)">${alg.distribution_funnel?.broad_discovery_fyp?.probability_pct || 36}% Prob</strong>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" style="width:${alg.distribution_funnel?.broad_discovery_fyp?.probability_pct || 36}%"></div></div>
+                  <small style="display:block;margin-top:6px;font-size:10px;color:#A7ADA1">${esc(alg.distribution_funnel?.broad_discovery_fyp?.catalyst_needed || '')}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          ${dir.ab_test_hypotheses && dir.ab_test_hypotheses.length ? `
+            <div style="margin-top:20px;border-top:1px solid #41473D;padding-top:16px">
+              <h4 style="margin:0 0 4px;font-size:14px;display:flex;align-items:center;gap:6px">
+                <span>🎬</span> CreativeDirector AI: Recommended A/B Test Variant Cuts
+              </h4>
+              <p style="margin:0 0 10px;font-size:11px;color:#A7ADA1">Test these distinct editorial cuts against this baseline to maximize platform reach.</p>
+              <div class="variant-grid">
+                ${dir.ab_test_hypotheses.map(v => `
+                  <div class="variant-card">
+                    <strong style="display:block;font-size:13px;color:var(--cyan);margin-bottom:6px">${esc(v.variant_name)}</strong>
+                    <p style="font-size:12px;margin:0 0 6px;color:#F5F5F0">${esc(v.hypothesis)}</p>
+                    <small style="font-size:11px;color:#A7ADA1"><b>Key Difference:</b> ${esc(v.key_difference)}</small>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
     el.innerHTML = `
       ${runSelectorHtml}
       <div class="notice">
@@ -1894,6 +2242,15 @@ function renderAnalytics() {
       </div>
 
       <div class="metric-row">
+        ${r.summary.overall_score !== undefined ? `
+          <div class="metric">
+            <small>CREATIVE GRADE / SCORE</small>
+            <strong style="color:${r.summary.overall_score < 35 ? '#D5AAA0' : (r.summary.overall_score < 60 ? '#D6C39D' : 'var(--cyan)')}">
+              ${r.summary.overall_score}<span style="font-size:16px">/100</span>
+            </strong>
+            <em style="color:${r.summary.overall_score < 35 ? '#D5AAA0' : '#A7ADA1'}">${esc(r.summary.creative_tier || 'Needs Polish')}</em>
+          </div>
+        ` : ''}
         <div class="metric">
           <small>ESTIMATED RETENTION</small>
           <strong>${pct(r.summary.estimated_retention)}</strong>
@@ -1963,6 +2320,9 @@ function renderAnalytics() {
         </div>
       </div>
 
+      <!-- 5-Agent Deliberative Intelligence Hub -->
+      ${agentHubHtml}
+
       <!-- Retention Curve & Engagement Probs -->
       <div class="grid-two" style="margin-top:16px">
         <div class="panel">
@@ -2030,10 +2390,14 @@ function renderAnalytics() {
           <div class="activity-list">
             ${r.persona_responses.map(p => `
               <div class="activity">
-                ${personaAvatar(byId(p.persona_id) || { emoji: '◈' })}
-                <div>
-                  <strong>${esc(p.persona)}</strong>
-                  <p>“${esc(p.reaction)}”</p>
+                ${personaAvatar(byId(p.persona_id) || { emoji: p.emoji || '◈' })}
+                <div style="flex:1">
+                  <div style="display:flex;justify-content:space-between;align-items:center">
+                    <strong>${esc(p.persona)}</strong>
+                    <span class="tag" style="font-size:10px">${p.action_probabilities ? `Continue ${pct(p.action_probabilities.continue)} · Skip ${pct(p.action_probabilities.skip)}` : ''}</span>
+                  </div>
+                  <p style="margin:4px 0 6px">“${esc(p.reaction)}”</p>
+                  ${p.internal_monologue ? `<div style="font-size:11px;color:#A7ADA1;background:#171A17;padding:6px 10px;border-radius:6px;margin-bottom:6px"><b>Inner Monologue:</b> ${esc(p.internal_monologue)}</div>` : ''}
                   <time>${esc(p.reasoning_basis)}</time>
                 </div>
               </div>
@@ -2042,21 +2406,22 @@ function renderAnalytics() {
         </div>
       </div>
 
-      <!-- Intelligent Report Assistant & Actual Performance Form -->
+      <!-- Intelligent Multi-Agent Assistant & Actual Performance Form -->
       <div class="grid-two" style="margin-top:16px">
         <div class="panel">
           <div class="panel-head">
             <div>
-              <h3>Ask the simulation report</h3>
-              <p>Conversational breakdown grounded in this run's data</p>
+              <h3>Ask the AI Agent Advisory Team</h3>
+              <p>Conversational breakdown grounded in this run's multi-agent deliberation</p>
             </div>
+            <span class="tag" style="color:var(--cyan)">⚡ Gemini LLM Grounded</span>
           </div>
           <div class="chat-chips">
-            <button class="chat-chip" data-q="Which cohort liked it best?">🏆 Best cohort?</button>
-            <button class="chat-chip" data-q="Who dropped off and skipped most?">📉 Drop-off risk?</button>
-            <button class="chat-chip" data-q="How should I fix the hook in the first 3 seconds?">🎯 Fix the hook</button>
-            <button class="chat-chip" data-q="Give me the top recommendations to edit">💡 Top edits</button>
-            <button class="chat-chip" data-q="What is the viral potential of this video?">🚀 Viral potential</button>
+            <button class="chat-chip" data-q="HookMaster AI: Give me 3 alternative hook scripts for TikTok">⚡ Hook scripts?</button>
+            <button class="chat-chip" data-q="AudiencePsychologist AI: Why did the casual scroller almost skip?">🧠 Why did casuals skip?</button>
+            <button class="chat-chip" data-q="RetentionPacing AI: Where are the drop-off cliffs in this video?">📉 Drop-off cliffs?</button>
+            <button class="chat-chip" data-q="ViralAlgorithm AI: How do I unlock broad FYP distribution?">🚀 FYP distribution?</button>
+            <button class="chat-chip" data-q="CreativeDirector AI: What is the single highest-ROI edit to make?">🎬 Director's #1 fix</button>
           </div>
           <div class="chat-messages" id="chatMessages">
             <div class="chat-bubble">Ask about specific drop-off points, cohort objections, or recommendations for this video.</div>
@@ -2198,13 +2563,14 @@ async function askReport(e) {
   if (!q || !run) return;
 
   let msgs = $('chatMessages');
-  msgs.insertAdjacentHTML('beforeend', `<div class="chat-bubble user">${esc(q)}</div><div class="chat-bubble">Thinking from simulation data…</div>`);
+  msgs.insertAdjacentHTML('beforeend', `<div class="chat-bubble user">${esc(q)}</div><div class="chat-bubble">Thinking from multi-agent deliberation…</div>`);
   let pending = msgs.lastElementChild;
   $('chatQuestion').value = '';
 
   try {
     let r = await post(`/runs/${run}/ask`, { question: q });
-    pending.textContent = r.answer;
+    let agentBadge = r.responding_agent ? `<div style="font-size:11px;color:var(--cyan);font-weight:700;margin-bottom:6px">🤖 ${esc(r.responding_agent)}</div>` : '';
+    pending.innerHTML = agentBadge + formatMarkdown(r.answer);
   } catch (err) {
     pending.textContent = err.message;
   }
