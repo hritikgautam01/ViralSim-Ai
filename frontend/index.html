@@ -3531,6 +3531,26 @@
                 Seed Pool Pass: <strong>${viralAlg.distribution_funnel?.initial_seed_pool?.pass_rate_pct || 15}%</strong>
               </div>
             </div>
+
+            <!-- Creative Director Card (5th Agent) -->
+            <div style="background:var(--bg-surface-alt);border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:16px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <span>🎬</span> <strong style="font-size:14px;">CreativeDirector AI</strong>
+                </div>
+                <span class="badge ${overallScore < 30 ? 'red' : (overallScore < 60 ? 'amber' : 'green')}">${overallScore}/100 (${esc(creativeDir.creative_tier || 'Synthesis')})</span>
+              </div>
+              <p style="font-size:12px;color:var(--text-muted);margin-bottom:10px;line-height:1.5;">${esc(creativeDir.executive_verdict || 'Executive multi-agent synthesis and editorial calibration completed.')}</p>
+              ${creativeDir.prioritized_action_plan && creativeDir.prioritized_action_plan[0] ? `
+                <div style="font-size:11px;background:#fff;padding:8px;border-radius:6px;border:1px solid #e2e8f0;color:#334155;">
+                  <strong>Top Directive:</strong> ${esc(creativeDir.prioritized_action_plan[0].editorial_directive || 'Prioritized editorial revision')}
+                </div>
+              ` : `
+                <div style="font-size:11px;color:var(--text-dim);">
+                  Executive Tier: <strong style="color:var(--yt-red);">${esc(creativeDir.creative_tier || 'Calibrated')}</strong>
+                </div>
+              `}
+            </div>
           </div>
 
           <!-- 3 Hook Rewrites by HookMaster AI -->
